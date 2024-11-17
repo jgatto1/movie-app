@@ -1,0 +1,16 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_PRISMA_URL")
+}
+
+// Define your models here
+model Movie {
+  id        String @id @default(cuid())
+  title     String
+  publishingYear Int
+  posterUrl String?
+}

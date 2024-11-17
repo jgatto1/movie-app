@@ -9,7 +9,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
+        primary: "#2BD17E",
+        error: "#EB5757",
+        background: "#093545",
+        input: "#224957",
+        card: "#092C39",
         foreground: "var(--foreground)",
       },
     },
