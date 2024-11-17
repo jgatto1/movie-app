@@ -9,7 +9,7 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
       key={movie.id}
       className="relative group block hover:opacity-80 transition-opacity bg-card rounded-lg"
     >
-      <div className="aspect-[3/4] relative overflow-hidden rounded-lg">
+      <div className="relative overflow-hidden rounded-lg min-h-[300px]">
         <Image
           src={movie.posterUrl}
           alt={movie.title}

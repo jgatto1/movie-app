@@ -1,6 +1,17 @@
 import { NextResponse } from "next/server";
 import prisma from "../../../../../prisma/client";
 
+// GET movie by id
+export async function GET(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const movie = await prisma.movie.findUnique({
+    where: { id: (await params).id },
+  });
+  return NextResponse.json(movie);
+}
+
 export async function PUT(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
