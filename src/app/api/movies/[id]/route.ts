@@ -1,31 +1,9 @@
 import { NextResponse } from "next/server";
 import prisma from "../../../../../prisma/client";
 
-export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
-  try {
-    const movie = await prisma.movie.findUnique({
-      where: { id: params.id },
-    });
-
-    if (!movie) {
-      return NextResponse.json({ error: "Movie not found" }, { status: 404 });
-    }
-
-    return NextResponse.json(movie);
-  } catch (error) {
-    return NextResponse.json(
-      { error: "Failed to fetch movie" },
-      { status: 500 }
-    );
-  }
-}
-
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const body = await request.json();
@@ -40,11 +18,11 @@ export async function PUT(
     }
 
     const updatedMovie = await prisma.movie.update({
-      where: { id: params.id },
+      where: { id: (await params).id },
       data: {
         title,
         publishingYear,
-        posterUrl
+        posterUrl,
       },
     });
 
