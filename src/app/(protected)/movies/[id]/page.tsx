@@ -25,10 +25,8 @@ export default function MoviePage() {
     try {
       // Add your API call here
       if (isEdit) {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/movies/${id}`,
-          {
-            method: "PUT",
+        const res = await fetch(`/api/movies/${id}`, {
+          method: "PUT",
             body: JSON.stringify(movie),
           }
         );
@@ -36,7 +34,7 @@ export default function MoviePage() {
           router.push("/movies");
         }
       } else {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/movies`, {
+        const res = await fetch(`/api/movies`, {
           method: "POST",
           body: JSON.stringify(movie),
         });
@@ -57,9 +55,7 @@ export default function MoviePage() {
   useEffect(() => {
     const loadMovie = async () => {
       setIsMovieLoading(true);
-      const movieRes = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/movies/${id}`
-      );
+      const movieRes = await fetch(`/api/movies/${id}`);
       const movie = await movieRes.json();
       setMovie(movie);
       setIsMovieLoading(false);

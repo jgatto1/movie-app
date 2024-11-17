@@ -15,7 +15,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/movies`)
+    fetch(`/api/movies`)
       .then((res) => res.json())
       .then((data) => {
         setMovies(data);
